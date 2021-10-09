@@ -11,13 +11,13 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <h3>Custom Directive</h3>
-        <p v-color:background.delay.flash="'green'">
+        <p v-color:background.delay.flash="{mainColor:'green', secondColor:'blue', delay:500}">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
           aspernatur beatae culpa doloribus, ex facilis fugiat, fugit magni
           molestiae mollitia, nesciunt nihil perspiciatis quaerat quam quas
           ratione sequi unde ut!
         </p>
-        <p v-color.delay.flash="'red'">
+        <p v-color.delay="'red'">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
           aspernatur beatae culpa doloribus, ex facilis fugiat, fugit magni
           molestiae mollitia, nesciunt nihil perspiciatis quaerat quam quas
@@ -45,8 +45,8 @@ export default {
         } 
 
         if(binding.modifiers["flash"]){
-          let firstColor = binding.value;
-          let secondColor = '#fbbd08';
+          let firstColor = binding.value.mainColor;
+          let secondColor = binding.value.secondColor;
           let currentColor = firstColor;
              setTimeout(() => {
                setInterval(()=>{
@@ -57,7 +57,7 @@ export default {
               } else {
                 el.style.color = currentColor;
               }
-               }, 1000)
+               }, binding.value.delay)
             }, delay);
 
         }
